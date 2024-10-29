@@ -60,9 +60,12 @@ snap-packages-classic=(
 ## Nerd Fonts
 ##
 wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
+wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraMono.zip
 cd ~/.local/share/fonts
 unzip FiraCode.zip
-rm FiraCode.zip
+unzip FiraMono.zip
+rm FiraCode.zip FiraMono.zip LICENSE README.md
+
 fc-cache -fv
 
 ## End nerdfonts
