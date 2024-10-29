@@ -51,6 +51,8 @@ apt_packages=(
 
 snap-packages=(
 	libreoffice
+	inkscape
+	gimp
 )
 
 snap-packages-classic=(
