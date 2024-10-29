@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+sudo -v || exit
 apt_repositories=(
 	ppa:neovim-ppa/stable
 	universe
@@ -57,6 +57,18 @@ snap-packages-classic=(
 )
 
 ##
+## Nerd Fonts
+##
+wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
+cd ~/.local/share/fonts
+unzip FiraCode.zip
+rm FiraCode.zip
+fc-cache -fv
+
+## End nerdfonts
+
+
+##
 ## Docker Setup
 ##
 
@@ -102,7 +114,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ##
 ## Pyenv installer
 ##
-curl https://pyenv.run | sh 
+curl https://pyenv.run | sh --  
 
 ## End Pyenv install
 
@@ -114,3 +126,10 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 sudo apt update 
 sudo apt install ros-dev-tools ros-jazzy-desktop
 ## End ROS install 
+
+##
+## Spaceship prompts
+#
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
