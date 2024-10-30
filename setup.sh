@@ -28,7 +28,8 @@ apt_packages=(
 	python3-dev
 	python3-virtualenv
 	qt6-base-dev
-	
+	ripgrep
+
 	# Python compile dependencies
 	libssl-dev
 	zlib1g-dev
@@ -49,16 +50,67 @@ apt_packages=(
 	uuid-runtime
 )
 
-snap-packages=(
+snap_packages=(
 	libreoffice
 	inkscape
 	gimp
 )
 
-snap-packages-classic=(
+snap_packages_classic=(
 	code
 	cmake
 )
+
+is_dpkg_installed() {
+	dpkg -l | grep -q "^ii $1\s"
+}
+
+is_snap_installed() {
+	snap -l | grep -q "^$1\s"
+}
+
+package_installer() {
+	installer_cmd = "$1"
+	is_installed_function = "$2"
+	shift 2
+	packages = "$@"
+	for package in "$packages[@]}"; do
+		if $is_installed_function "$package"; then
+			echo "$package is already installed"
+		else
+			sudo "$installer_cmd" "$package"
+		fi
+	done
+}
+
+for package in "${apt_packages[@]}"; do
+	if is_installed "$package"; then
+		echo "$package is already installed"
+	else
+		sudo apt install -y "$package"
+	fi
+done
+
+for package in "$snap_packages[@]"; do
+	if is_snap_installed "$package"; then
+		echo "$package is already isntalled"
+	else
+		sudo snap install "$package"
+	fi
+done
+
+
+for package in "$snap_packages_classic[@]"; do
+	if is_snap_installed "$package"; then
+		echo "$package is already isntalled"
+	else
+		sudo snap install "$package" --classic
+	fi
+done
+
+
+
+
 
 ##
 ## Nerd Fonts
