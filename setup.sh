@@ -26,6 +26,8 @@ apt_packages=(
 	clang
 	clang-18
 	llvm-18
+	openssh-server
+	openssl
 	python3-pip
 	python3-dev
 	python3-virtualenv
@@ -68,10 +70,10 @@ is_snap_installed() {
 }
 
 package_installer() {
-	installer_cmd = "$1"
-	is_installed_function = "$2"
+	installer_cmd="$1"
+	is_installed_function="$2"
 	shift 2
-	packages = "$@"
+	packages="$@"
 	for package in "$packages[@]}"; do
 		if $is_installed_function "$package"; then
 			echo "$package is already installed"
