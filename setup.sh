@@ -64,7 +64,7 @@ is_dpkg_installed() {
 }
 
 is_snap_installed() {
-	snap -l | grep -q "^$1\s"
+	snap -l | grep -q "^$1\s"
 }
 
 package_installer() {
