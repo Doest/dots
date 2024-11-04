@@ -1,0 +1,15 @@
+numpy
+pandas
+matplotlib
+taichi
+scikit-learn
+pillow
+opencv-python
+open3d
+transforms3d
+jupyter
+ipython
+pyside6
+numba
+wgpu
+
